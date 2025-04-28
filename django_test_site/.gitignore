@@ -1,0 +1,5 @@
+my_world/
+
+__pycache__/
+
+*.pyc
