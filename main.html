@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Api test!</title>
+</head>
+<body>
+
+    <h1>Here i test some API stuff !</h1>
+
+    <ul id="chats"></ul>
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // je vais chercher l'api via url:
+            fetch('http://127.0.0.1:8000/api_chats/chats_list/')
+            .then(response => response.json())
+            .then(data => {
+                
+                // je defini mon objet a remplir dans html (la liste):
+                const list = document.getElementById('chats');
+                data.forEach(chat => {
+                    const li = document.createElement('li');
+                    li.textContent = `nom: ${chat.name} , son age : ${chat.age} .`;
+                    list.append(li);
+                })
+
+            })
+
+
+
+
+
+
+
+        })
+    </script>
+</body>
+</html>

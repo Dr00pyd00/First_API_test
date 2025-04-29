@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Api test!</title>
+</head>
+<body>
+
+    <h1>Here I test some API stuff !</h1>
+
+    <h3 id="server_message"></h3>
+    
+
+    <!-- formulaire pour ajouter un chat -->
+    <form action="" id="chat_form">
+        <input type="text" name="" id="name" placeholder="Nom du chat">
+        <input type="number" name="" id="age" placeholder="Age du chat">
+        <button type="submit">Ajouter chat!</button>
+    </form>
+
+
+    <ul id="chats"></ul>
+    
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            
+            
+            const list = document.getElementById('chats');
+            const form = document.getElementById('chat_form');
+            const nameInput = document.getElementById('name');
+            const ageInput = document.querySelector('#age');
+
+
+            function loadChats() {
+                fetch('http://127.0.0.1:8000/api_chats/chats_list/')
+                .then(response => response.json())
+                .then(data => {
+                    list.innerHTML = '';
+                    // je defini mon objet a remplir dans html (la liste):
+                    data.forEach(chat => {
+                    
+                        const li = document.createElement('li');
+                        li.textContent = `nom: ${chat.name} , son age : ${chat.age} .`;
+                        list.append(li);
+                    });
+
+                });
+            } // fin de ma fonction.
+
+
+
+            // je checjk si y'a un submit et je bloque l'envoi classique pour pas recharger:
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                // setup du chat a ajouter:
+                const chat = {
+                    name: nameInput.value,
+                    age: ageInput.value,
+                };
+
+                fetch('http://127.0.0.1:8000/api_chats/chats_list/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(chat)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(`Chat ajouter : ${data}`);
+
+                    loadChats();
+                    form.reset();
+
+                    // afficher le message de la view django:
+                    document.getElementById('server_message').innerHTML = data.message;
+
+                })
+            });
+
+
+            // je lance ma func pour chercher les chats:
+            loadChats() 
+
+            // je relance toute les 5 sec la focntion:
+            setInterval(loadChats,5000)
+
+
+
+
+
+
+        });
+    </script>
+</body>
+</html>

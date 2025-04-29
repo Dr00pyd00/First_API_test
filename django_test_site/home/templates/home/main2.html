@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>test</title>
+</head>
+<body>
+
+    <h1>Teste refaire le code list chats:</h1>
+
+    <ul id="chats_list"></ul>
+    
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const listChats = document.getElementById('chats_list');
+
+            function loadChats() {
+
+                fetch('http://127.0.0.1:8000/api_chats/chats_list/')
+                .then(response => response.json())
+                .then(data => {
+                    listChats.innerHTML = '';
+                    data.forEach(chat => {
+
+                        const text = `nom: ${chat.name} // age: ${chat.age} ans.`;
+                        const li = document.createElement('li');
+                        li.textContent = text;
+                        listChats.append(li);
+                    });
+                });
+            } //fin
+
+
+            loadChats()
+
+            setInterval(loadChats, 6000)
+
+
+
+
+
+
+
+
+
+        });
+
+
+    </script>
+</body>
+</html>
