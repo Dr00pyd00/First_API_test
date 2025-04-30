@@ -1,0 +1,20 @@
+
+{% extends 'home/base.html' %}
+    
+    
+    {% block content %}
+
+    <h2>Page of {{cat}}  !!!</h2>
+
+    <ul>
+        <li>
+            {{cat}}
+        </li>
+        <li>
+            {{cat.age}}
+        </li>
+    </ul>
+
+    <a href="{% url 'cats:cat_list'  %}">Retour</a>
+
+    {% endblock content %}

@@ -1,0 +1,15 @@
+
+{% extends 'home/base.html' %}
+    
+    
+    {% block content %}
+
+    <h2>Sure to delete : {{cat}} ?</h2>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="DELETE">
+        <a href="{% url 'cats:cat_list' %}">Retour</a>
+    </form>
+
+    {% endblock content %}

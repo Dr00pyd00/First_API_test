@@ -1,0 +1,29 @@
+
+{% extends 'home/base.html' %}
+{% load static %}
+    
+    {% block content %}
+
+    <!-- je met le token csrf en place  -->
+     <meta name="csrf_token" content="{{csrf_token}}">
+
+    <h3>This work with : API / JS</h3>
+    <hr>
+
+    <h1>Cat list : </h1>
+
+    <ul id="cat_list"></ul>
+
+    <hr>
+
+    <!-- form pour ajouter un chat a la db -->
+
+    <form action="" id="cat_form">
+        <input type="text" name="" id="cat_name" placeholder="Cat Name">
+        <input type="number" name="" id="cat_age" placeholder="Cat Age">
+        <button type="submit">Add Cat</button>
+    </form>
+
+    <script src="{% static 'home/api_list.js' %}"></script>
+
+    {% endblock content %}

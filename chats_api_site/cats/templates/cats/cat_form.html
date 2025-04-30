@@ -1,0 +1,18 @@
+
+{% extends 'home/base.html' %}
+    
+    
+    {% block content %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" name="" id="">
+    </form>
+
+    <a href="{% url 'cats:cat_list'  %}">Retour</a>
+
+
+
+
+    {% endblock content %}

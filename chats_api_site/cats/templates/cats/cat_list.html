@@ -1,0 +1,42 @@
+
+{% extends 'home/base.html' %}
+    
+    
+    {% block content %}
+
+    <h3>This work with : DJANGO / Python</h3>
+
+    <h2>Cat list :</h2>
+
+    {% if cats %}
+
+        <ul>
+            {% for cat in cats %}
+            <li>
+                <a href="{% url 'cats:cat_detail' cat.id %}">{{cat}}</a>  
+                // age : {{cat.age}}
+                ## <a href="{% url 'cats:cat_delete' cat.id %}">delete</a>
+                ## <a href="{% url 'cats:cat_update' cat.id %}">update</a>
+            </li>
+
+            {% endfor %}
+        </ul>
+    
+    {% else %}
+    <p>No data !</p>
+    {% endif %}
+
+    <hr>
+
+    Create a cat : <a href="{% url 'cats:cat_create' %}">here</a>
+
+
+
+
+
+
+
+
+
+
+    {% endblock content %}
